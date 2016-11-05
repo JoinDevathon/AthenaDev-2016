@@ -1,0 +1,5 @@
+# Terminal Configuration
+
+# No permission message - displayed when a player tries to execute a command they don't have permissions for.
+# This must be a message (string) - not an integer or anything else.
+noPermission: '&cYou do not have permission to use this command!'
