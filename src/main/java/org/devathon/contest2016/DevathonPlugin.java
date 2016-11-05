@@ -7,6 +7,7 @@ import org.devathon.contest2016.commands.TerminalCommand;
 import org.devathon.contest2016.listeners.PlayerChat;
 import org.devathon.contest2016.listeners.PlayerInteract;
 import org.devathon.contest2016.listeners.PlayerJoin;
+import org.devathon.contest2016.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class DevathonPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        new Utils();
         saveDefaultConfig();
         setupDataConfig();
         saveData();
@@ -63,7 +65,7 @@ public class DevathonPlugin extends JavaPlugin {
     }
 
     public void registerListeners() {
-        getServer().getPluginManager().registerEvents(new PlayerChat(), this);
+        getServer().getPluginManager().registerEvents(new PlayerChat(this), this);
         getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
         getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
     }

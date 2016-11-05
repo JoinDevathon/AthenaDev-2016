@@ -27,8 +27,6 @@ public class PlayerJoin implements Listener {
         ConfigurationSection cs = plugin.dataConfig.getConfigurationSection("users" + "." + player.getUniqueId().toString());
         cs.set("username", player.getName());
         cs.set("password", "none");
-
-
-
+        plugin.saveData();
     }
 }

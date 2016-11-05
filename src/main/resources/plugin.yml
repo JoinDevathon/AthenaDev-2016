@@ -1,7 +1,18 @@
-name: Devathon Project
-description: A project for the Devathon contest
+name: DevathonProject-Terminal
+description: A project for the Devathon contest | Making generic commands accessible from a terminal block.
 version: 1.0.0
-author: Your Name Here
-
+author: AthenaDev
 main: org.devathon.contest2016.DevathonPlugin
 
+commands:
+    terminal:
+      description: Terminal Main Command
+      usage: /terminal
+      aliases: [devathonterminal]
+
+permissions:
+    terminal.reload:
+      description: Gives access to reload files.
+      default: op
+    terminal.give:
+      description: Gives access to

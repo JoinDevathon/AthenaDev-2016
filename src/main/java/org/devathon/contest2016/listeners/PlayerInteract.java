@@ -20,6 +20,8 @@ import java.util.ArrayList;
 public class PlayerInteract implements Listener {
 
     public static ItemStack skull;
+    public static ArrayList<String> enterUsername = new ArrayList<String>();
+    public static ArrayList<String> enterPassword = new ArrayList<String>();
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e) {
@@ -46,7 +48,12 @@ public class PlayerInteract implements Listener {
 
         if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if(e.getItem().getType().equals(Material.SKULL_ITEM) && (skullMeta.getOwner().equals("Hack"))) {
-                player.sendMessage(ChatColor.GREEN + "> "+ ChatColor.GREEN + "Loading terminal...");
+                // check if the block can't go there?
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Loading terminal...");
+                player.sendMessage("");
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Type 'exit' or 'cancel' at any time to end your current session.");
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Enter your username." + ChatColor.DARK_GRAY + " (By default your Minecraft username)");
+                enterUsername.add(player.getUniqueId().toString());
             }
         }
     }

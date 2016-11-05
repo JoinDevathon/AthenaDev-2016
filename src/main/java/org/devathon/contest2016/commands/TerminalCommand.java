@@ -9,10 +9,14 @@ import org.bukkit.entity.Player;
 import org.devathon.contest2016.DevathonPlugin;
 import org.devathon.contest2016.listeners.PlayerInteract;
 
+import java.util.HashMap;
+
 /**
  * Created by AthenaDev on 11/5/16.
  */
 public class TerminalCommand implements CommandExecutor {
+
+    public static HashMap<String, String> setUsername = new HashMap<String, String>();
 
     private DevathonPlugin plugin;
 
@@ -65,6 +69,9 @@ public class TerminalCommand implements CommandExecutor {
             }
             else if(!player.hasPermission("terminal.reload")) {
                 player.sendMessage(plugin.config.getString("noPermission", ChatColor.RED + "You do not have permission to use this command!"));
+            }
+            else if(args[0].equalsIgnoreCase("setUsername")) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Please enter what you would like your new terminal username to be. Type 'cancel' or 'exit' at any time to stop.");
             }
         }
         return true;
