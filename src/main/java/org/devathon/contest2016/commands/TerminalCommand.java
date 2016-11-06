@@ -7,18 +7,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.devathon.contest2016.DevathonPlugin;
-import org.devathon.contest2016.listeners.PlayerInteract;
-
-import java.util.HashMap;
+import org.devathon.contest2016.utils.Utils;
 
 /**
  * Created by AthenaDev on 11/5/16.
  */
 public class TerminalCommand implements CommandExecutor {
 
-    public static HashMap<String, String> setUsername = new HashMap<String, String>();
-
-    private DevathonPlugin plugin;
+    public DevathonPlugin plugin;
 
     public TerminalCommand(DevathonPlugin instance) {
         plugin = instance;
@@ -40,24 +36,23 @@ public class TerminalCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "/terminal give <player> " + ChatColor.GRAY + "Gives the specified player a Terminal Block.");
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "/terminal setUsername <username> " + ChatColor.GRAY + "Sets terminal username.");
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "/terminal setPassword <password> " + ChatColor.GRAY + "Sets terminal password. (If there is no current password)");
-                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "/terminal resetPassword <oldPassword> <newPassword> <confirmNewPassword> " + ChatColor.GRAY + "Resets current terminal password.");
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "/terminal reload " + ChatColor.GRAY + "Reloads the user data file & configuration file.");
                 player.sendMessage("");
             }
         }
 
-        if(args.length == 1) {
+        if(args.length == 2) {
             Player target = Bukkit.getPlayerExact(args[1]);
 
-            if(target == null) {
+            if((target == null) && (args[0].equalsIgnoreCase("give"))) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Couldn't find the specified player.");
             }
 
-            if(args[0].equalsIgnoreCase("give") && (args[1].equals(target) && (player.hasPermission("terminal.give")))) {
+            if(args[0].equalsIgnoreCase("give") && (args[1].equals(target.getName()) && (player.hasPermission("terminal.give")))) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Giving a terminal to " + target.getName() + "...");
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Success!");
                 target.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "You were given a terminal block by " + player.getName());
-                target.getInventory().addItem(PlayerInteract.skull);
+                target.getInventory().addItem(plugin.skull);
             }
             else if(!player.hasPermission("terminal.give")) {
                 player.sendMessage(plugin.config.getString("noPermission", ChatColor.RED + "You do not have permission to use this command!"));
@@ -71,7 +66,25 @@ public class TerminalCommand implements CommandExecutor {
                 player.sendMessage(plugin.config.getString("noPermission", ChatColor.RED + "You do not have permission to use this command!"));
             }
             else if(args[0].equalsIgnoreCase("setUsername")) {
-                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Please enter what you would like your new terminal username to be. Type 'cancel' or 'exit' at any time to stop.");
+                StringBuilder username = new StringBuilder();
+                for (int i = 1; i < args.length; i++) username.append(args[i] + "");
+                String newUsername = username.toString();
+
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Successfully set terminal login username to " + newUsername + "!");
+                player.sendMessage(ChatColor.GREEN + "> _");
+                Utils.setUsername(player, newUsername);
+            }
+            else if(args[0].equalsIgnoreCase("setPassword")) {
+                StringBuilder password = new StringBuilder();
+                for (int i = 1; i < args.length; i++) password.append(args[i] + "");
+                String newPassword = password.toString();
+
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Successfully set password to " + newPassword + "!");
+                player.sendMessage(ChatColor.GREEN + "> _");
+                Utils.setPassword(player, newPassword);
+            }
+            else {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Something went wrong! Check your arguments.");
             }
         }
         return true;

@@ -15,4 +15,5 @@ permissions:
       description: Gives access to reload files.
       default: op
     terminal.give:
-      description: Gives access to
+      description: Gives access to give a terminal block.
+      default: op

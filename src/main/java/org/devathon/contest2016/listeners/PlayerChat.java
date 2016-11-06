@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.devathon.contest2016.DevathonPlugin;
-import org.devathon.contest2016.commands.TerminalCommand;
 import org.devathon.contest2016.utils.Utils;
 
 import java.util.ArrayList;
@@ -16,8 +15,8 @@ import java.util.ArrayList;
  */
 public class PlayerChat implements Listener {
 
-    public static ArrayList<String> terminateSession = new ArrayList<String>();
-    public boolean yesOrNo;
+    public static ArrayList<String> inCurrentSession = new ArrayList<String>();
+    public boolean yesOrNoUsername, yesOrNoPassword;
 
     private DevathonPlugin plugin;
 
@@ -30,10 +29,10 @@ public class PlayerChat implements Listener {
 
         Player player = e.getPlayer();
 
-        // add minecraft command (and maybe git, for fun?)
+        // add minecraft commands
 
         if(PlayerInteract.enterUsername.contains(player.getUniqueId().toString())) {
-            if(e.getMessage().equalsIgnoreCase(Utils.getUsername(player))) {
+            if(e.getMessage().equals(Utils.getUsername(player))) {
                 e.setCancelled(true);
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Signing into " + player.getName() + "...");
 
@@ -52,55 +51,38 @@ public class PlayerChat implements Listener {
             else {
                 e.setCancelled(true);
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Invalid username!");
+                player.sendMessage(ChatColor.GREEN + "> _");
             }
+        }
+
+        if(e.getMessage().equalsIgnoreCase("help") && (inCurrentSession.contains(player.getUniqueId().toString()))) {
+            player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Valid commands:");
+            player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "gamemode <0-3> | tp <player> | time set <day, night>");
         }
 
         if(PlayerInteract.enterPassword.contains(player.getUniqueId().toString())) {
-            if(e.getMessage().equalsIgnoreCase(Utils.getPassword(player))) {
-
-            }
-            else {
-                e.setCancelled(true);
-                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Invalid password!");
-            }
-        }
-
-        if(TerminalCommand.setUsername.containsKey(player.getUniqueId().toString())) {
             e.setCancelled(true);
-            TerminalCommand.setUsername.put(player.getUniqueId().toString(), e.getMessage());
-            player.sendMessage(ChatColor.GREEN + "> " + ChatColor.GREEN + "Are you sure you want to change your terminal username to " + e.getMessage() + "? (y or n)");
-
-            if(yesOrNo == true) {
-                Utils.setUsername(player, e.getMessage());
-                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.GREEN + "Successfully changed username to " + e.getMessage() + ".");
+            if(e.getMessage().equalsIgnoreCase(Utils.getPassword(player))) {
+                PlayerInteract.enterPassword.remove(player.getUniqueId().toString());
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Signed into " + player.getName() + "!");
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Type 'help' to view all commands. Type 'exit' to exit the terminal.");
+                player.sendMessage(ChatColor.GREEN + "> _");
+                inCurrentSession.add(player.getUniqueId().toString());
             }
             else {
-                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Cancelled current operation.");
-                TerminalCommand.setUsername.remove(player.getUniqueId().toString(), e.getMessage());
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Invalid password!");
+                player.sendMessage(ChatColor.GREEN + "> _");
             }
         }
 
-        if(e.getMessage().equalsIgnoreCase("y") || (e.getMessage().equalsIgnoreCase("yes") && (TerminalCommand.setUsername.containsKey(player.getUniqueId().toString())))) {
-            yesOrNo = true;
-        }
-
-        /*
-        if(e.getMessage().equalsIgnoreCase("exit") || (e.getMessage().equalsIgnoreCase("cancel") && (PlayerInteract.enterUsername.contains(player.getUniqueId().toString())) || (PlayerInteract.enterPassword.contains(player.getUniqueId().toString())))) {
+        if(e.getMessage().equalsIgnoreCase("exit") || (e.getMessage().equalsIgnoreCase("cancel") && (inCurrentSession.contains(player.getUniqueId().toString())))) {
             e.setCancelled(true);
             PlayerInteract.enterUsername.remove(player.getUniqueId().toString());
             PlayerInteract.enterPassword.remove(player.getUniqueId().toString());
             player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Cancelled current operation.");
-        }
-        */
-
-        if(e.getMessage().equalsIgnoreCase("y") || (e.getMessage().equalsIgnoreCase("yes"))) {
-            e.setCancelled(true);
-            player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Completed operation.");
-        }
-
-        if(e.getMessage().equalsIgnoreCase("n") || (e.getMessage().equalsIgnoreCase("no"))) {
-            e.setCancelled(true);
-            player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Current operation cancelled.");
+            player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Signing out and exiting terminal...");
+            player.sendMessage(ChatColor.GREEN + "> ");
+            player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "[Process Completed]");
         }
     }
 }
