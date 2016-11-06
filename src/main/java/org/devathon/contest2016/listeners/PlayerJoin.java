@@ -21,7 +21,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
 
-        Player player = (Player) e.getPlayer();
+        Player player = e.getPlayer();
 
         plugin.dataConfig.createSection("users" + "." + player.getUniqueId().toString());
         ConfigurationSection cs = plugin.dataConfig.getConfigurationSection("users" + "." + player.getUniqueId().toString());

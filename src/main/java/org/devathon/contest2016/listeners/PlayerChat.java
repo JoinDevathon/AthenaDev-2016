@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class PlayerChat implements Listener {
 
     public static ArrayList<String> inCurrentSession = new ArrayList<String>();
-    public boolean yesOrNoUsername, yesOrNoPassword;
 
     private DevathonPlugin plugin;
 

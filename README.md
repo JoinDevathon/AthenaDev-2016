@@ -19,7 +19,7 @@ by default your username for the terminal will be your in-game name. (IGN)
 ready to be placed down.
 
 [NOTE] This system works, but it's a bit buggy and throws some errors in console. I would've liked to fix this and gone
-into more detail and make it have more features, but I don't have much time left - I'll try to get it done if I can. (6:12 AM Mountain Time)
+into more detail and make it have more features, but I don't have much time left.
 
 4. When the terminal is placed, it will prompt you to enter your username & password - you may do so. Enter it in chat.
 If you haven't set a password, it will send you an error message telling you that you need to set a password.
