@@ -34,6 +34,8 @@ public class PlayerInteract implements Listener {
             return;
         }
 
+        // Improvement: Rather than checking for the display name Terminal Block, check if the block's skullMeta hasOwner "Hack"
+
         Player player = e.getPlayer();
 
         if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
@@ -46,6 +48,9 @@ public class PlayerInteract implements Listener {
                 player.sendMessage(ChatColor.GREEN + "> _");
                 enterUsername.add(player.getUniqueId().toString());
             }
+        }
+        else {
+            return;
         }
     }
 }

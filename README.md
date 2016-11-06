@@ -1,6 +1,61 @@
 # Devathon Project
 This is the base layout for your Devathon Project. It includes several scripts to make running incredibly easy on Windows, Mac, and Linux.
 
+## ** INSTRUCTIONS **
+
+1. When you have the plugin installed and loaded on a server, run the command /terminal.
+This should show you all valid commands, and you can play around with them if you desire.
+
+2. You'll want to run the command /terminal setpassword <password> - this will set your "terminal password,"
+which will allow you to login to the terminal machine and run certain Minecraft commands! :)
+
+[OPTIONAL] User data is stored in the userData.yml - you could edit from there if you'd like, and then type
+/terminal reload to reload that data file.
+
+[OPTIONAL] You may also set your username, the same way as above, or using /terminal setusername <username> -
+by default your username for the terminal will be your in-game name. (IGN)
+
+3. Once you have your password set, type /terminal give <your in-game name> - this will give you a terminal block,
+ready to be placed down.
+
+[NOTE] This system works, but it's a bit buggy and throws some errors in console. I would've liked to fix this and gone
+into more detail and make it have more features, but I don't have much time left - I'll try to get it done if I can. (6:12 AM Mountain Time)
+
+4. When the terminal is placed, it will prompt you to enter your username & password - you may do so. Enter it in chat.
+If you haven't set a password, it will send you an error message telling you that you need to set a password.
+
+[NOTE] When entering your password, "Invalid Password" might show up, just ignore it if you've set a password.
+
+[NOTE] This plugin is chat-based. Besides commands, everything is done in chat.
+
+5. Great! You're signed in. If not, refer to earlier steps (and feel free to ask me on Discord!- if that's allowed)
+It should send you
+"Signed into <your username>"
+"Type 'help' to view all commands. Type 'exit' to exit the terminal."
+
+Type "help" in chat to view all commands. Type any of those commands in chat, and it will make you run the command-
+If you don't have permission to do /stop, for example, you won't be able to do it via Terminal.
+
+You can also type exit which will simply leave the terminal, sign out, and keep the block there. You'll have to give yourself
+another block if you want to sign in again. (Sorry, ran out of time. I wanted the block to destroy on exit)
+
+
+That's pretty much it! I'll add anything if I remember.
+
+Huge thanks to @codenameflip, who helped me switch to IntelliJ *temporarily* and help me fix Maven countless times so I could code my idea.
+It took like 2 hours, and if he didn't help me, I wouldn't have been able to do this.
+
+NOTE - He did not break the rules in any way, he simply helped me get going.
+
+Thanks for taking your time to read & review my project.
+~ AthenaDev
+
+P.S.
+By the way, https://github.com/JoinDevathon/Athena222-2016 is me - I don't know why it created two - I think I
+changed my name in that time period. Of course, my project is in this repository, AthenaDev.
+Do not view that one, because it has nothing and i've requested for it to be deleted.
+
+
 ## Help
 
 Help will be available for 25 hours during the contest at the following sources:

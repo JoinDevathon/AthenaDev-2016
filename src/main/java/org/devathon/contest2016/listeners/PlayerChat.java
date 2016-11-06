@@ -26,10 +26,7 @@ public class PlayerChat implements Listener {
 
     @EventHandler
     public void onAsyncPlayerChat(AsyncPlayerChatEvent e) {
-
         Player player = e.getPlayer();
-
-        // add minecraft commands
 
         if(PlayerInteract.enterUsername.contains(player.getUniqueId().toString())) {
             if(e.getMessage().equals(Utils.getUsername(player))) {
@@ -62,57 +59,67 @@ public class PlayerChat implements Listener {
             player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "say <message>  | plugins/pl | stop");
         }
 
-        if(inCurrentSession.contains(player.getUniqueId().toString())) { // TODO Logger.info ? Player executed this command - just so people know what's happening
+        if(inCurrentSession.contains(player.getUniqueId().toString())) {
             e.setCancelled(true);
             if(e.getMessage().equalsIgnoreCase("gamemode 0")) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to change gamemode to 0...");
                 player.performCommand("gamemode 0");
                 inCurrentSession.remove(player.getUniqueId().toString());
+                plugin.logger.info(player.getName() + " executed the command /gamemode 0 via the terminal.");
             }
             if(e.getMessage().equalsIgnoreCase("gamemode 1")) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to change gamemode to 1...");
                 player.performCommand("gamemode 1");
                 inCurrentSession.remove(player.getUniqueId().toString());
+                plugin.logger.info(player.getName() + " executed the command /gamemode 1 via the terminal.");
             }
             if(e.getMessage().equalsIgnoreCase("gamemode 2")) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to change gamemode to 2...");
                 player.performCommand("gamemode 2");
                 inCurrentSession.remove(player.getUniqueId().toString());
+                plugin.logger.info(player.getName() + " executed the command /gamemode 2 via the terminal.");
             }
             if(e.getMessage().equalsIgnoreCase("gamemode 3")) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to change gamemode to 3...");
                 player.performCommand("gamemode 3");
                 inCurrentSession.remove(player.getUniqueId().toString());
+                plugin.logger.info(player.getName() + " executed the command /gamemode 3 via the terminal.");
             }
             if(e.getMessage().equalsIgnoreCase("tps")) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to load TPS...");
                 player.performCommand("tps");
                 inCurrentSession.remove(player.getUniqueId().toString());
+                plugin.logger.info(player.getName() + " executed the command /tps via the terminal.");
             }
             if(e.getMessage().equalsIgnoreCase("time set day")) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to set time to day...");
                 player.performCommand("time set day");
                 inCurrentSession.remove(player.getUniqueId().toString());
+                plugin.logger.info(player.getName() + " executed the command /time set day via the terminal.");
             }
             if(e.getMessage().equalsIgnoreCase("time set night")) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to set time to night...");
                 player.performCommand("time set night");
                 inCurrentSession.remove(player.getUniqueId().toString());
+                plugin.logger.info(player.getName() + " executed the command /time set night via the terminal.");
             }
             if(e.getMessage().contains("say")) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to execute command 'say' with message " + e.getMessage().replaceAll("say ", ""));
                 player.performCommand("say " + e.getMessage().replaceAll("say ", ""));
                 inCurrentSession.remove(player.getUniqueId().toString());
+                plugin.logger.info(player.getName() + " executed the command /say via the terminal.");
             }
             if(e.getMessage().equalsIgnoreCase("plugins") || (e.getMessage().equalsIgnoreCase("pl"))) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to view plugin list...");
                 player.performCommand("plugins");
                 inCurrentSession.remove(player.getUniqueId().toString());
+                plugin.logger.info(player.getName() + " executed the command /plugins via the terminal.");
             }
             if(e.getMessage().equalsIgnoreCase("stop")) {
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to stop server...");
                 player.performCommand("stop");
                 inCurrentSession.remove(player.getUniqueId().toString());
+                plugin.logger.info(player.getName() + " executed the command /stop via the terminal.");
             }
         }
 
@@ -120,7 +127,7 @@ public class PlayerChat implements Listener {
             e.setCancelled(true);
             if(e.getMessage().equalsIgnoreCase(Utils.getPassword(player))) {
                 PlayerInteract.enterPassword.remove(player.getUniqueId().toString());
-                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Signed into " + player.getName() + "!");
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Signed into " + Utils.getUsername(player) + "!");
                 player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Type 'help' to view all commands. Type 'exit' to exit the terminal.");
                 player.sendMessage(ChatColor.GREEN + "> _");
                 inCurrentSession.add(player.getUniqueId().toString());

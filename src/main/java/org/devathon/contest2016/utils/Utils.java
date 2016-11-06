@@ -28,24 +28,10 @@ public class Utils {
     }
 
     public static String getUsername(Player player) {
-        if(plugin.dataConfig.getConfigurationSection("users" + "." + player.getUniqueId().toString()).getString("username") == null) {
-            return player.getName();
-        }
-
-        if(plugin.dataConfig.getConfigurationSection("users" + "." + player.getUniqueId().toString()) == null) {
-            System.out.println("Users Configuration Section is null");
-        }
-
-        if(plugin.dataConfig.getConfigurationSection("users" + "." + player.getUniqueId().toString()).getString("username") == null) {
-            System.out.println("Username is null is null");
-        }
-
         return plugin.dataConfig.getConfigurationSection("users" + "." + player.getUniqueId().toString()).getString("username");
     }
 
     public static String getPassword(Player player) {
-        if(plugin.dataConfig.getConfigurationSection("users" + "." + player.getUniqueId().toString()).getString("password") == null)
-            return "none";
         return plugin.dataConfig.getConfigurationSection("users" + "." + player.getUniqueId().toString()).getString("password");
     }
 }
