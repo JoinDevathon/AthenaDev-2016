@@ -56,8 +56,64 @@ public class PlayerChat implements Listener {
         }
 
         if(e.getMessage().equalsIgnoreCase("help") && (inCurrentSession.contains(player.getUniqueId().toString()))) {
+            e.setCancelled(true);
             player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Valid commands:");
-            player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "gamemode <0-3> | tp <player> | time set <day, night>");
+            player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "gamemode <0-3> | tps | time set <day, night>");
+            player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "say <message>  | plugins/pl | stop");
+        }
+
+        if(inCurrentSession.contains(player.getUniqueId().toString())) { // TODO Logger.info ? Player executed this command - just so people know what's happening
+            e.setCancelled(true);
+            if(e.getMessage().equalsIgnoreCase("gamemode 0")) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to change gamemode to 0...");
+                player.performCommand("gamemode 0");
+                inCurrentSession.remove(player.getUniqueId().toString());
+            }
+            if(e.getMessage().equalsIgnoreCase("gamemode 1")) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to change gamemode to 1...");
+                player.performCommand("gamemode 1");
+                inCurrentSession.remove(player.getUniqueId().toString());
+            }
+            if(e.getMessage().equalsIgnoreCase("gamemode 2")) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to change gamemode to 2...");
+                player.performCommand("gamemode 2");
+                inCurrentSession.remove(player.getUniqueId().toString());
+            }
+            if(e.getMessage().equalsIgnoreCase("gamemode 3")) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to change gamemode to 3...");
+                player.performCommand("gamemode 3");
+                inCurrentSession.remove(player.getUniqueId().toString());
+            }
+            if(e.getMessage().equalsIgnoreCase("tps")) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to load TPS...");
+                player.performCommand("tps");
+                inCurrentSession.remove(player.getUniqueId().toString());
+            }
+            if(e.getMessage().equalsIgnoreCase("time set day")) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to set time to day...");
+                player.performCommand("time set day");
+                inCurrentSession.remove(player.getUniqueId().toString());
+            }
+            if(e.getMessage().equalsIgnoreCase("time set night")) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to set time to night...");
+                player.performCommand("time set night");
+                inCurrentSession.remove(player.getUniqueId().toString());
+            }
+            if(e.getMessage().contains("say")) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to execute command 'say' with message " + e.getMessage().replaceAll("say ", ""));
+                player.performCommand("say " + e.getMessage().replaceAll("say ", ""));
+                inCurrentSession.remove(player.getUniqueId().toString());
+            }
+            if(e.getMessage().equalsIgnoreCase("plugins") || (e.getMessage().equalsIgnoreCase("pl"))) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to view plugin list...");
+                player.performCommand("plugins");
+                inCurrentSession.remove(player.getUniqueId().toString());
+            }
+            if(e.getMessage().equalsIgnoreCase("stop")) {
+                player.sendMessage(ChatColor.GREEN + "> " + ChatColor.DARK_GREEN + "Attempting to stop server...");
+                player.performCommand("stop");
+                inCurrentSession.remove(player.getUniqueId().toString());
+            }
         }
 
         if(PlayerInteract.enterPassword.contains(player.getUniqueId().toString())) {
