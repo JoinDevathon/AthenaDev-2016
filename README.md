@@ -6,13 +6,13 @@ This is the base layout for your Devathon Project. It includes several scripts t
 1. When you have the plugin installed and loaded on a server, run the command /terminal.
 This should show you all valid commands, and you can play around with them if you desire.
 
-2. You'll want to run the command /terminal setpassword <password> - this will set your "terminal password,"
+2. You'll want to run the command /terminal setpassword (password) - this will set your "terminal password,"
 which will allow you to login to the terminal machine and run certain Minecraft commands! :)
 
 [OPTIONAL] User data is stored in the userData.yml - you could edit from there if you'd like, and then type
 /terminal reload to reload that data file.
 
-[OPTIONAL] You may also set your username, the same way as above, or using /terminal setusername <username> -
+[OPTIONAL] You may also set your username, the same way as above, or using /terminal setusername (username) -
 by default your username for the terminal will be your in-game name. (IGN)
 
 3. Once you have your password set, type /terminal give <your in-game name> - this will give you a terminal block,
@@ -30,7 +30,7 @@ If you haven't set a password, it will send you an error message telling you tha
 
 5. Great! You're signed in. If not, refer to earlier steps (and feel free to ask me on Discord!- if that's allowed)
 It should send you
-"Signed into <your username>"
+"Signed into (your username)"
 "Type 'help' to view all commands. Type 'exit' to exit the terminal."
 
 Type "help" in chat to view all commands. Type any of those commands in chat, and it will make you run the command-
@@ -40,7 +40,7 @@ You can also type exit which will simply leave the terminal, sign out, and keep 
 another block if you want to sign in again. (Sorry, ran out of time. I wanted the block to destroy on exit)
 
 
-That's pretty much it! I'll add anything if I remember.
+That's pretty much it! I'll add anything if I need to.
 
 Huge thanks to @codenameflip, who helped me switch to IntelliJ *temporarily* and help me fix Maven countless times so I could code my idea.
 It took like 2 hours, and if he didn't help me, I wouldn't have been able to do this.
